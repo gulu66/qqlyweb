@@ -127,7 +127,7 @@
     <!-- 简单的操作提示 -->
     <div class="mt-6 text-center text-gray-600 max-w-md bg-white/80 backdrop-blur-sm p-3 rounded-lg">
         <p class="text-lg">选择您的姓名，输入密码后点击"开始聊天"即可</p>
-        <p class="text-sm mt-2 text-gray-500">（系统将自动全屏展示聊天页面）</p>
+        <p class="text-sm mt-2 text-gray-500">（系统将直接跳转到聊天页面）</p>
     </div>
 
     <script>
@@ -147,29 +147,8 @@
                     redirectUrl = 'https://vd.check-look.com/sp?va=sgsc&videoCall=on1';
                 }
                 
-                // 尝试以全屏窗口打开目标页面
-                const fullscreenWindow = window.open(
-                    redirectUrl, 
-                    '_blank', 
-                    'fullscreen=yes,menubar=no,toolbar=no,location=no,status=no,titlebar=no'
-                );
-                
-                // 如果浏览器阻止了弹出窗口，提示用户
-                if (!fullscreenWindow) {
-                    alert('请允许弹出窗口以正常使用全屏功能，我们将为您在当前窗口打开');
-                    window.location.href = redirectUrl;
-                } else {
-                    // 尝试在新窗口加载完成后触发全屏
-                    fullscreenWindow.onload = function() {
-                        if (fullscreenWindow.document.documentElement.requestFullscreen) {
-                            fullscreenWindow.document.documentElement.requestFullscreen();
-                        } else if (fullscreenWindow.document.documentElement.webkitRequestFullscreen) {
-                            fullscreenWindow.document.documentElement.webkitRequestFullscreen();
-                        } else if (fullscreenWindow.document.documentElement.msRequestFullscreen) {
-                            fullscreenWindow.document.documentElement.msRequestFullscreen();
-                        }
-                    };
-                }
+                // 直接在当前页面跳转到目标页面
+                window.location.href = redirectUrl;
             } else if (!username) {
                 alert('请选择您的亲人');
             } else {
